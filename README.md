@@ -7,15 +7,14 @@
 ![Project Maintenance][maintenance-shield]
 [![BuyMeCoffee][buymecoffeebadge]][buymecoffee]
 
-_Integration to integrate with [octopus_agile][octopus_agile]._
+_Integration to pull pricing data from Octopus Agile tariff for using on dashboards and in automations
 
 **This integration will set up the following platforms.**
 
 Platform | Description
 -- | --
-`binary_sensor` | Show something `True` or `False`.
-`sensor` | Show info from blueprint API.
-`switch` | Switch something `True` or `False`.
+`sensor.octopus_agile_import_price` | Show Octopus Agile prices
+`sensor.octopus_agile_export_price` | Show Octopus Agile prices
 
 ## Installation
 
@@ -37,12 +36,12 @@ If you want to contribute to this please read the [Contribution guidelines](CONT
 
 ***
 
-[octopus_agile]: https://github.com/raldred/octopus_agile
+[hass-octopus-agile]: https://github.com/raldred/hass-octopus-agile
 [buymecoffee]: https://www.buymeacoffee.com/raldred
 [buymecoffeebadge]: https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg?style=for-the-badge
-[commits-shield]: https://img.shields.io/github/commit-activity/y/raldred/octopus_agile.svg?style=for-the-badge
-[commits]: https://github.com/raldred/octopus_agile/commits/main
-[license-shield]: https://img.shields.io/github/license/raldred/octopus_agile.svg?style=for-the-badge
+[commits-shield]: https://img.shields.io/github/commit-activity/y/raldred/hass-octopus-agile.svg?style=for-the-badge
+[commits]: https://github.com/raldred/hass-octopus-agile/commits/main
+[license-shield]: https://img.shields.io/github/license/raldred/hass-octopus-agile.svg?style=for-the-badge
 [maintenance-shield]: https://img.shields.io/badge/maintainer-Rob%20Aldred%20%40raldred-blue.svg?style=for-the-badge
-[releases-shield]: https://img.shields.io/github/release/raldred/octopus_agile.svg?style=for-the-badge
-[releases]: https://github.com/raldred/octopus_agile/releases
+[releases-shield]: https://img.shields.io/github/release/raldred/hass-octopus-agile.svg?style=for-the-badge
+[releases]: https://github.com/raldred/hass-octopus-agile/releases

@@ -6,6 +6,7 @@ LOGGER: Logger = getLogger(__package__)
 API_BASE = "https://api.octopus.energy/v1/products/"
 
 NAME = "Octopus Agile"
+AUTHOR = "Rob Aldred"
 DOMAIN = "octopus_agile"
 VERSION = "0.0.1"
 ATTRIBUTION = "Data provided by Octopus Energy"

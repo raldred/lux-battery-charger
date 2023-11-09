@@ -33,5 +33,15 @@
                 }
             }
         }
+    },
+    "entity": {
+        "sensor": {
+            "import_prices": {
+                "name": "Import Prices"
+            },
+            "export_prices": {
+                "name": "Export Prices"
+            }
+        }
     }
 }

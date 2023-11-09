@@ -32,7 +32,8 @@ class OctopusAgileDataUpdateCoordinator(DataUpdateCoordinator):
         update_interval: int
     ) -> None:
         """Initialize."""
-        self.client = client
+        self._previousprices = None
+        self._client = client
         super().__init__(
             hass=hass,
             logger=LOGGER,
@@ -43,8 +44,11 @@ class OctopusAgileDataUpdateCoordinator(DataUpdateCoordinator):
     async def _async_update_data(self):
         """Update data via library."""
         try:
-            await self.client.async_get_import_prices()
-            return await self.client.async_get_export_prices()
+            prices = {
+                "import": await self._client.async_get_import_prices(),
+                "export": await self._client.async_get_export_prices()
+            }
+            return prices
         except OctopusAgileApiClientAuthenticationError as exception:
             raise ConfigEntryAuthFailed(exception) from exception
         except OctopusAgileApiClientError as exception:

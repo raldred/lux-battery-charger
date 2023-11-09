@@ -45,11 +45,20 @@ class OctopusAgileDataUpdateCoordinator(DataUpdateCoordinator):
         """Update data via library."""
         try:
             prices = {
-                "import": await self._client.async_get_import_prices(),
-                "export": await self._client.async_get_export_prices()
+                "import_prices": await self._client.async_get_import_prices(),
+                "export_prices": await self._client.async_get_export_prices()
             }
             return prices
         except OctopusAgileApiClientAuthenticationError as exception:
             raise ConfigEntryAuthFailed(exception) from exception
         except OctopusAgileApiClientError as exception:
             raise UpdateFailed(exception) from exception
+
+    def get_sensor_value(self, key=""):
+        if key == "import_prices":
+            return len(self.data.get('import_prices'))
+        elif key == "export_prices":
+            return len(self.data.get('export_prices'))
+
+        #just in case
+        return None

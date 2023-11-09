@@ -10,6 +10,9 @@ AUTHOR = "Rob Aldred"
 DOMAIN = "octopus_agile"
 VERSION = "0.0.1"
 ATTRIBUTION = "Data provided by Octopus Energy"
+
+ATTR_ENTRY_TYPE = "entry_type"
+
 TARIFF_REGION = "region"
 IMPORT_TARIFF = "import_tariff"
 EXPORT_TARIFF = "export_tariff"

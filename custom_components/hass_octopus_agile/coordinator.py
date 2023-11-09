@@ -1,4 +1,4 @@
-"""DataUpdateCoordinator for integration_blueprint."""
+"""DataUpdateCoordinator for octopus_agile."""
 from __future__ import annotations
 
 from datetime import timedelta
@@ -12,15 +12,15 @@ from homeassistant.helpers.update_coordinator import (
 from homeassistant.exceptions import ConfigEntryAuthFailed
 
 from .api import (
-    IntegrationBlueprintApiClient,
-    IntegrationBlueprintApiClientAuthenticationError,
-    IntegrationBlueprintApiClientError,
+    OctopusAgileApiClient,
+    OctopusAgileApiClientAuthenticationError,
+    OctopusAgileApiClientError,
 )
 from .const import DOMAIN, LOGGER
 
 
 # https://developers.home-assistant.io/docs/integration_fetching_data#coordinated-single-api-poll-for-data-for-all-entities
-class BlueprintDataUpdateCoordinator(DataUpdateCoordinator):
+class OctopusAgileDataUpdateCoordinator(DataUpdateCoordinator):
     """Class to manage fetching data from the API."""
 
     config_entry: ConfigEntry
@@ -28,7 +28,8 @@ class BlueprintDataUpdateCoordinator(DataUpdateCoordinator):
     def __init__(
         self,
         hass: HomeAssistant,
-        client: IntegrationBlueprintApiClient,
+        client: OctopusAgileApiClient,
+        update_interval: int
     ) -> None:
         """Initialize."""
         self.client = client
@@ -36,14 +37,15 @@ class BlueprintDataUpdateCoordinator(DataUpdateCoordinator):
             hass=hass,
             logger=LOGGER,
             name=DOMAIN,
-            update_interval=timedelta(minutes=5),
+            update_interval=timedelta(minutes=update_interval),
         )
 
     async def _async_update_data(self):
         """Update data via library."""
         try:
-            return await self.client.async_get_data()
-        except IntegrationBlueprintApiClientAuthenticationError as exception:
+            await self.client.async_get_import_prices()
+            return await self.client.async_get_export_prices()
+        except OctopusAgileApiClientAuthenticationError as exception:
             raise ConfigEntryAuthFailed(exception) from exception
-        except IntegrationBlueprintApiClientError as exception:
+        except OctopusAgileApiClientError as exception:
             raise UpdateFailed(exception) from exception

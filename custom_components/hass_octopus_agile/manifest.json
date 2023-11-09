@@ -1,0 +1,12 @@
+{
+  "domain": "octopus_agile",
+  "name": "Octopus Aglie",
+  "codeowners": [
+    "@raldred"
+  ],
+  "config_flow": true,
+  "documentation": "https://github.com/raldred/hass-octopus_agile",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/raldred/hass-octopus_agile/issues",
+  "version": "0.0.1"
+}

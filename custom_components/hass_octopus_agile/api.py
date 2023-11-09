@@ -7,50 +7,50 @@ import socket
 import aiohttp
 import async_timeout
 
+from .const import API_BASE
 
-class IntegrationBlueprintApiClientError(Exception):
+class OctopusAgileApiClientError(Exception):
     """Exception to indicate a general API error."""
 
 
-class IntegrationBlueprintApiClientCommunicationError(
-    IntegrationBlueprintApiClientError
+class OctopusAgileApiClientCommunicationError(
+    OctopusAgileApiClientError
 ):
     """Exception to indicate a communication error."""
 
 
-class IntegrationBlueprintApiClientAuthenticationError(
-    IntegrationBlueprintApiClientError
+class OctopusAgileApiClientAuthenticationError(
+    OctopusAgileApiClientError
 ):
     """Exception to indicate an authentication error."""
 
 
-class IntegrationBlueprintApiClient:
-    """Sample API Client."""
+class OctopusAgileApiClient:
+    """Client to call Octopus API."""
 
     def __init__(
         self,
-        username: str,
-        password: str,
+        import_tariff: str,
+        export_tariff: str,
+        region: str,
         session: aiohttp.ClientSession,
     ) -> None:
-        """Sample API Client."""
-        self._username = username
-        self._password = password
+        """Client to call Octopus API."""
+        self._import_tariff = import_tariff
+        self._export_tariff = export_tariff
+        self._region = region
         self._session = session
 
-    async def async_get_data(self) -> any:
-        """Get data from the API."""
+    async def async_get_import_prices(self) -> any:
+        """Get import prices from the API."""
         return await self._api_wrapper(
-            method="get", url="https://jsonplaceholder.typicode.com/posts/1"
+            method="get", url=f"{API_BASE}{self._import_tariff}/electricity-tariffs/E-1R-{self._import_tariff}-{self._region}/standard-unit-rates/?page_size=96"
         )
-
-    async def async_set_title(self, value: str) -> any:
-        """Get data from the API."""
+    
+    async def async_get_export_prices(self) -> any:
+        """Get export prices from the API."""
         return await self._api_wrapper(
-            method="patch",
-            url="https://jsonplaceholder.typicode.com/posts/1",
-            data={"title": value},
-            headers={"Content-type": "application/json; charset=UTF-8"},
+            method="get", url=f"{API_BASE}{self._export_tariff}/electricity-tariffs/E-1R-{self._export_tariff}-{self._region}/standard-unit-rates/?page_size=96"
         )
 
     async def _api_wrapper(
@@ -70,21 +70,22 @@ class IntegrationBlueprintApiClient:
                     json=data,
                 )
                 if response.status in (401, 403):
-                    raise IntegrationBlueprintApiClientAuthenticationError(
+                    raise OctopusAgileApiClientAuthenticationError(
                         "Invalid credentials",
                     )
                 response.raise_for_status()
-                return await response.json()
+                result = await response.json()
+                return result['results']
 
         except asyncio.TimeoutError as exception:
-            raise IntegrationBlueprintApiClientCommunicationError(
+            raise OctopusAgileApiClientCommunicationError(
                 "Timeout error fetching information",
             ) from exception
         except (aiohttp.ClientError, socket.gaierror) as exception:
-            raise IntegrationBlueprintApiClientCommunicationError(
+            raise OctopusAgileApiClientCommunicationError(
                 "Error fetching information",
             ) from exception
         except Exception as exception:  # pylint: disable=broad-except
-            raise IntegrationBlueprintApiClientError(
+            raise OctopusAgileApiClientError(
                 "Something really wrong happened!"
             ) from exception

@@ -6,7 +6,7 @@ https://github.com/raldred/octopus_agile
 from __future__ import annotations
 
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import CONF_PASSWORD, CONF_USERNAME, Platform
+from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 
@@ -31,7 +31,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             region=entry.data[TARIFF_REGION],
             session=async_get_clientsession(hass),
         ),
-        update_interval=entry.data[UPDATE_INTERVAL]
+        update_interval=entry.data[UPDATE_INTERVAL],
     )
     # https://developers.home-assistant.io/docs/integration_fetching_data#coordinated-single-api-poll-for-data-for-all-entities
     await coordinator.async_config_entry_first_refresh()

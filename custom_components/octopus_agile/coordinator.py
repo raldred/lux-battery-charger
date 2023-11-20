@@ -32,7 +32,6 @@ class OctopusAgileDataUpdateCoordinator(DataUpdateCoordinator):
         update_interval: int
     ) -> None:
         """Initialize."""
-        self._previousprices = None
         self._client = client
         super().__init__(
             hass=hass,
@@ -41,24 +40,58 @@ class OctopusAgileDataUpdateCoordinator(DataUpdateCoordinator):
             update_interval=timedelta(minutes=update_interval),
         )
 
+    def get_sensor_value(self, sensor_id):
+        return None
+
     async def _async_update_data(self):
         """Update data via library."""
         try:
-            prices = {
-                "import_prices": await self._client.async_get_import_prices(),
-                "export_prices": await self._client.async_get_export_prices()
+            import_data = await self._client.async_get_import_prices()
+            export_data = await self._client.async_get_export_prices()
+
+            combined_data = self._build_combined_array(import_data, export_data)
+
+            return {
+                "all": combined_data
             }
-            return prices
         except OctopusAgileApiClientAuthenticationError as exception:
             raise ConfigEntryAuthFailed(exception) from exception
         except OctopusAgileApiClientError as exception:
             raise UpdateFailed(exception) from exception
+        
 
-    def get_sensor_value(self, key=""):
-        if key == "import_prices":
-            return len(self.data.get('import_prices'))
-        elif key == "export_prices":
-            return len(self.data.get('export_prices'))
+    def _build_combined_array(self, import_data, export_data):
+        """Build array of tariff data, combining import and export"""
+        combined_data = list(
+            map(
+                lambda imp, exp: {
+                    "from": imp["valid_from"],
+                    "upto": imp["valid_to"],
+                    "date": imp["valid_from"][:10],
+                    "timefrom": imp["valid_from"][11:16],
+                    "timeupto": imp["valid_to"][11:16],
+                    "import": imp["value_inc_vat"],
+                    "export": exp["value_inc_vat"]
+                },
+                import_data,
+                export_data
+            )
+        )
 
-        #just in case
-        return None
+        return combined_data
+    
+    def _import_low_data(self, data, sample=15):
+        return sorted(
+            data,
+            key=lambda x: x["import"],
+            reverse=False
+        )[:sample]
+
+
+    def _export_high_data(self, data, sample=15):
+        return sorted(
+            data,
+            key=lambda x: x["export"],
+            reverse=True
+        )[:sample]
+

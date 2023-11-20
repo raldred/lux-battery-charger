@@ -33,11 +33,13 @@ SENSORS: dict[str, SensorEntityDescription] = {
         translation_key="export_prices",
         suggested_display_precision=0,
         icon="mdi:format-list-numbered",
-    )
+    ),
 }
 
 
-async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback):
+async def async_setup_entry(
+    hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback
+):
     """Set up the sensor platform."""
     coordinator: OctopusAgileDataUpdateCoordinator = hass.data[DOMAIN][entry.entry_id]
     entities = []
@@ -74,19 +76,34 @@ class OctopusAgileSensor(CoordinatorEntity, SensorEntity):
             self._sensor_data = coordinator.get_sensor_value(entity_description.key)
         except Exception as ex:
             LOGGER.error(
-                f"OctopusAgile - unable to get sensor value {ex} %s", traceback.format_exc()
+                f"OctopusAgile - unable to get sensor value {ex} %s",
+                traceback.format_exc(),
             )
             self._sensor_data = None
 
         self._attr_device_info = {
             ATTR_IDENTIFIERS: {(DOMAIN, entry.entry_id)},
-            ATTR_NAME: NAME, #entry.title,
+            ATTR_NAME: NAME,  # entry.title,
             ATTR_MANUFACTURER: AUTHOR,
             ATTR_MODEL: NAME,
             ATTR_ENTRY_TYPE: DeviceEntryType.SERVICE,
             ATTR_SW_VERSION: VERSION,
             ATTR_CONFIGURATION_URL: "https://toolkit.solcast.com.au/",
         }
+
+    @property
+    def extra_state_attributes(self):
+        """Return the state extra attributes of the sensor."""
+        try:
+            return self.coordinator.get_sensor_extra_attributes(
+                self.entity_description.key
+            )
+        except Exception as ex:
+            LOGGER.error(
+                f"OctopusAgile - unable to get sensor value {ex} %s",
+                traceback.format_exc(),
+            )
+            return None
 
     @property
     def native_value(self):
@@ -102,7 +119,8 @@ class OctopusAgileSensor(CoordinatorEntity, SensorEntity):
             )
         except Exception as ex:
             LOGGER.error(
-                f"OctopusAgile - unable to get sensor value {ex} %s", traceback.format_exc()
+                f"OctopusAgile - unable to get sensor value {ex} %s",
+                traceback.format_exc(),
             )
             self._sensor_data = None
         self.async_write_ha_state()

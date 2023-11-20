@@ -7,7 +7,8 @@
 ![Project Maintenance][maintenance-shield]
 [![BuyMeCoffee][buymecoffeebadge]][buymecoffee]
 
-_Integration to pull pricing data from Octopus Agile tariff for using on dashboards and in automations
+This integration is intended to pull pricing data from Octopus and automate battery charging of a connected lux inverter.
+This relies on a lux integration, either lxp-bridge or LuxPython
 
 **This integration will set up the following platforms.**
 
@@ -44,12 +45,12 @@ If you want to contribute to this please read the [Contribution guidelines](CONT
 
 ***
 
-[hass-octopus-agile]: https://github.com/raldred/hass-octopus-agile
+[lux-battery-charger]: https://github.com/raldred/lux-battery-charger
 [buymecoffee]: https://www.buymeacoffee.com/raldred
 [buymecoffeebadge]: https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg?style=for-the-badge
-[commits-shield]: https://img.shields.io/github/commit-activity/y/raldred/hass-octopus-agile.svg?style=for-the-badge
-[commits]: https://github.com/raldred/hass-octopus-agile/commits/main
-[license-shield]: https://img.shields.io/github/license/raldred/hass-octopus-agile.svg?style=for-the-badge
+[commits-shield]: https://img.shields.io/github/commit-activity/y/raldred/lux-battery-charger.svg?style=for-the-badge
+[commits]: https://github.com/raldred/lux-battery-charger/commits/main
+[license-shield]: https://img.shields.io/github/license/raldred/lux-battery-charger.svg?style=for-the-badge
 [maintenance-shield]: https://img.shields.io/badge/maintainer-Rob%20Aldred%20%40raldred-blue.svg?style=for-the-badge
-[releases-shield]: https://img.shields.io/github/release/raldred/hass-octopus-agile.svg?style=for-the-badge
-[releases]: https://github.com/raldred/hass-octopus-agile/releases
+[releases-shield]: https://img.shields.io/github/release/raldred/lux-battery-charger.svg?style=for-the-badge
+[releases]: https://github.com/raldred/lux-battery-charger/releases

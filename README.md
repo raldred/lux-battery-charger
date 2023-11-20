@@ -11,10 +11,18 @@ _Integration to pull pricing data from Octopus Agile tariff for using on dashboa
 
 **This integration will set up the following platforms.**
 
-Platform | Description
+Entity | Description
 -- | --
-`sensor.octopus_agile_import_price` | Show Octopus Agile prices
-`sensor.octopus_agile_export_price` | Show Octopus Agile prices
+`sensor.lux_charger_import_prices` | Show Octopus Agile export price data
+`sensor.lux_charger_export_prices` | Show Octopus Agile export price data
+`sensor.lux_charger_battery_hours_left`
+`sensor.lux_charger_low_import_start`|Start time of next low import block
+`sensor.lux_charger_low_import_end`|End time of next low import block
+`sensor.lux_charger_low_import_cost`|Average cost during the next low import block
+`sensor.lux_charger_high_export_start`|Start time of next high export block
+`sensor.lux_charger_high_export_end`|End time of next high export block
+`sensor.lux_charger_high_export_cost`|Average cost during the next high export block
+``
 
 ## Installation
 

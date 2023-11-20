@@ -10,7 +10,9 @@
 This integration is intended to pull pricing data from Octopus and automate battery charging of a connected lux inverter.
 This relies on a lux integration, either lxp-bridge or LuxPython
 
-Ispiration comes from other wonderful integrations, particularly
+I was inspired to create this after looking at other wonderful integrations, particularly
+* lxp-bridge
+* LuxPython
 * Predbat
 * Octoblock
 

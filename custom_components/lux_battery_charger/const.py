@@ -1,13 +1,13 @@
-"""Constants for octopus_agile."""
+"""Constants for lux_battery_charger."""
 from logging import Logger, getLogger
 
 LOGGER: Logger = getLogger(__package__)
 
 API_BASE = "https://api.octopus.energy/v1/products/"
 
-NAME = "Octopus Agile"
+NAME = "Lux Battery Charger"
 AUTHOR = "Rob Aldred"
-DOMAIN = "octopus_agile"
+DOMAIN = "lux_battery_charger"
 VERSION = "0.0.1"
 ATTRIBUTION = "Data provided by Octopus Energy"
 

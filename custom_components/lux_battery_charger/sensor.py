@@ -1,4 +1,4 @@
-"""Sensor platform for octopus_agile."""
+"""Sensor platform for lux_battery_charger."""
 from __future__ import annotations
 
 import traceback
@@ -52,7 +52,7 @@ async def async_setup_entry(
 
 
 class OctopusAgileSensor(CoordinatorEntity, SensorEntity):
-    """octopus_agile Sensor class."""
+    """lux_battery_charger Sensor class."""
 
     _attr_attribution = ATTRIBUTION
     _attr_has_entity_name = True

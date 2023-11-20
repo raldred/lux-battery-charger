@@ -1,7 +1,7 @@
-"""Custom integration to integrate octopus_agile with Home Assistant.
+"""Custom integration to integrate lux_battery_charger with Home Assistant.
 
 For more details about this integration, please refer to
-https://github.com/raldred/octopus_agile
+https://github.com/raldred/lux_battery_charger
 """
 from __future__ import annotations
 

@@ -48,7 +48,7 @@ Use [black](https://github.com/ambv/black) to make sure the code follows the sty
 
 ## Test your code modification
 
-This custom component is based on [octopus_agile template](https://github.com/raldred/octopus_agile).
+This custom component is based on [lux_battery_charger template](https://github.com/raldred/lux_battery_charger).
 
 It comes with development environment in a container, easy to launch
 if you use Visual Studio Code. With this container you will have a stand alone

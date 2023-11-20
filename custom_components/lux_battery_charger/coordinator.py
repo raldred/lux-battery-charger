@@ -1,4 +1,4 @@
-"""DataUpdateCoordinator for octopus_agile."""
+"""DataUpdateCoordinator for lux_battery_charger."""
 from __future__ import annotations
 
 from datetime import timedelta

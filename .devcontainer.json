@@ -1,5 +1,5 @@
 {
-    "name": "raldred/octopus_agile",
+    "name": "raldred/lux-battery-charger",
     "image": "mcr.microsoft.com/devcontainers/python:3.11-bullseye",
     "postCreateCommand": "scripts/setup",
     "forwardPorts": [

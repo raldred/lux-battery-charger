@@ -1,0 +1,12 @@
+{
+  "domain": "lux_battery_charger",
+  "name": "Lux Battery Charger",
+  "codeowners": [
+    "@raldred"
+  ],
+  "config_flow": true,
+  "documentation": "https://github.com/raldred/lux-battery-charger",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/raldred/lux-battery-charger/issues",
+  "version": "0.0.1"
+}
